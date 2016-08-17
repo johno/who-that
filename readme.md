@@ -1,6 +1,6 @@
 # who-that [![Build Status](https://secure.travis-ci.org/johnotander/who-that.svg?branch=master)](https://travis-ci.org/johnotander/who-that) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 
-Get a developer profile based on their GitHub username and email
+Get a developer profile based on information like their GitHub/npm usernames.
 
 ## Installation
 
@@ -13,7 +13,10 @@ npm install --save who-that
 ```javascript
 var whoThat = require('who-that')
 
-whoThat()  // => true
+whoThat({
+  github: 'johnotander',
+  npm: 'johno'
+}).then(console.log) // => {...}
 ```
 
 ## License

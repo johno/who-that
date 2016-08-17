@@ -13,7 +13,12 @@
   "repository": "johnotander/who-that",
   "keywords": [],
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "gh-user": "^2.2.0",
+    "github-username": "^3.0.0",
+    "npm-user": "^2.1.0",
+    "pkg-list": "^1.0.2"
+  },
   "devDependencies": {
     "ava": "*"
   }
