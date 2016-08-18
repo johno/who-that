@@ -3,6 +3,7 @@
 const ghUser = require('gh-user')
 const pinnedRepos = require('gh-pinned-repos')
 const npmUser = require('npm-user')
+const pkgList = require('pkg-list')
 
 module.exports = function whoThat (who) {
   return new Promise((resolve, reject) => {
@@ -15,6 +16,13 @@ module.exports = function whoThat (who) {
       .then(data => {
         if (who.npm) {
           return npmUser(who.npm).then(npm => Object.assign({}, npm, data))
+        } else {
+          return data
+        }
+      })
+      .then(data => {
+        if (who.npm) {
+          return pkgList(who.npm).then(pkgs => Object.assign({}, { pkgs }, data))
         } else {
           return data
         }
