@@ -1,9 +1,7 @@
 import test from 'ava'
 import whoThat from './'
 
-test('who-that does something awesome', async t => {
-  t.plan(1)
-
+test('who-that finds out who that', async t => {
   const who = await whoThat({
     github: 'johnotander',
     npm: 'johno',
@@ -11,5 +9,5 @@ test('who-that does something awesome', async t => {
   })
 
   console.log(who)
-  t.pass()
+  t.truthy(who)
 })
