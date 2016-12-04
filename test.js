@@ -8,7 +8,6 @@ test('who-that finds out who that', async t => {
     twitter: '4lpine'
   })
 
-  console.log(who)
   t.truthy(who)
 })
 
@@ -19,7 +18,6 @@ test('who-that finds out who that email', async t => {
     twitter: '4lpine'
   })
 
-  console.log(who)
   t.truthy(who)
 })
 
@@ -29,6 +27,5 @@ test('who-that finds out who that without npm', async t => {
     twitter: '4lpine'
   })
 
-  console.log(who)
   t.truthy(who)
 })
