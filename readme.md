@@ -14,6 +14,11 @@ npm install --save who-that
 var whoThat = require('who-that')
 
 whoThat({
+  email: 'johnotander@gmail.com',
+  npm: 'johno'
+}).then(console.log) // => {...}
+
+whoThat({
   github: 'johnotander',
   npm: 'johno'
 }).then(console.log) // => {...}

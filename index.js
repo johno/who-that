@@ -5,18 +5,26 @@ const pinnedRepos = require('gh-pinned-repos')
 const npmUser = require('npm-user')
 const pkgList = require('pkg-list')
 const isBlank = require('is-blank')
+const githubUsername = require('github-username')
 
 module.exports = function whoThat (who) {
   return new Promise((resolve, reject) => {
-    ghUser(who.github)
-      .then(gh => Object.assign({}, gh))
-      .then(data => pinnedRepos(who.github).then(pinned => Object.assign({}, data, { pinned })))
+    let findWho = Object.assign({}, who)
+    let firstFind = (isBlank(findWho.github)) ? githubUsername(findWho.email) : ghUser(findWho.github)
+    firstFind
       .then(data => {
-        if (isBlank(who.npm)) return data
-
-        return npmUser(who.npm)
+        if (isBlank(findWho.github)) {
+          findWho.github = data
+          return ghUser(data).then(gh => Object.assign({}, gh))
+        }
+        return Object.assign({}, data)
+      })
+      .then(data => pinnedRepos(findWho.github).then(pinned => Object.assign({}, data, { pinned })))
+      .then(data => {
+        if (isBlank(findWho.npm)) return data
+        return npmUser(findWho.npm)
           .then(npm => Object.assign({}, npm, data))
-          .then(data => pkgList(who.npm).then(pkgs => Object.assign({}, { pkgs }, data)))
+          .then(data => pkgList(findWho.npm).then(pkgs => Object.assign({}, { pkgs }, data)))
       })
       .then(resolve)
       .catch(reject)
